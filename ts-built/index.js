@@ -14,21 +14,7 @@ function main() {
     return __awaiter(this, void 0, void 0, function* () {
         let deck = (0, poker_1.generateDeck)();
         let hands = (0, poker_1.getHandsFromDeck)(deck, 2);
-        hands[0] = [
-            { value: "2", suit: "S" },
-            { value: "3", suit: "S" },
-            { value: "4", suit: "D" },
-            { value: "5", suit: "S" },
-            { value: "6", suit: "C" },
-        ];
-        hands[1] = [
-            { value: "2", suit: "D" },
-            { value: "3", suit: "D" },
-            { value: "3", suit: "S" },
-            { value: "2", suit: "C" },
-            { value: "2", suit: "H" },
-        ];
-        console.log((0, poker_1.getWinner)(hands));
+        console.log(`Hand ${(0, poker_1.getWinner)(hands)} hat gewonnen! (Starting from 0)`);
     });
 }
 main();
