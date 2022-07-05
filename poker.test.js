@@ -67,3 +67,42 @@ test("Get Winner", function () {
   expect(getWinner(hands1)).toBe(0);
   expect(getWinner(hands2)).toBe(1);
 });
+
+test("Get Winner with same level", function () {
+  const hands1 = [
+    [
+      { value: "J", suit: "S" },
+      { value: "T", suit: "C" },
+      { value: "A", suit: "C" },
+      { value: "J", suit: "C" },
+      { value: "9", suit: "C" },
+    ],
+    [
+      { value: "K", suit: "S" },
+      { value: "8", suit: "D" },
+      { value: "9", suit: "S" },
+      { value: "K", suit: "H" },
+      { value: "5", suit: "S" },
+    ],
+  ];
+
+  const hands2 = [
+    [
+      { value: "K", suit: "S" },
+      { value: "8", suit: "D" },
+      { value: "9", suit: "S" },
+      { value: "K", suit: "H" },
+      { value: "5", suit: "S" },
+    ],
+    [
+      { value: "J", suit: "S" },
+      { value: "T", suit: "C" },
+      { value: "A", suit: "C" },
+      { value: "J", suit: "C" },
+      { value: "9", suit: "C" },
+    ],
+  ];
+
+  expect(getWinner(hands1)).toBe(1);
+  expect(getWinner(hands2)).toBe(0);
+});

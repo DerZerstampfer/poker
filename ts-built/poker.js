@@ -138,6 +138,72 @@ function getWinner(hands) {
     }
     let ranking = [...powerLevels];
     ranking.sort((a, b) => a.level - b.level);
+    let doubles = ranking.filter((item) => item.level == ranking[ranking.length - 1].level);
+    if (doubles.length == 2) {
+        let hand1 = hands[0], hand2 = hands[1];
+        switch (doubles[0].level) {
+            case 0:
+                // If the highest cards have the same value, the hands are ranked by the next highest, and so on.
+                console.log(hands);
+                hand1.sort((a, b) => valueVariants.indexOf(b.value) - valueVariants.indexOf(a.value));
+                hand2.sort((a, b) => valueVariants.indexOf(b.value) - valueVariants.indexOf(a.value));
+                for (let i = 0; i < 5; i++) {
+                    let value1 = valueVariants.indexOf(hand1[i].value);
+                    let value2 = valueVariants.indexOf(hand2[i].value);
+                    if (value1 > value2) {
+                        return 0;
+                    }
+                    else if (value1 < value2) {
+                        return 1;
+                    }
+                }
+                break;
+            case 1:
+                // Hands which both contain a pair are ranked by the value of the cards forming the pair. If these values are the same, the hands are ranked by the values of the cards not forming the pair, in decreasing order.
+                if (doubles[0].level2 > doubles[1].level2) {
+                    return 0;
+                }
+                else if (doubles[0].level2 < doubles[1].level2) {
+                    return 1;
+                }
+                hand1 = hand1.filter((item) => item.value !== doubles[0].level2);
+                hand2 = hand2.filter((item) => item.value !== doubles[0].level2);
+                hand1.sort((a, b) => valueVariants.indexOf(b.value) - valueVariants.indexOf(a.value));
+                hand2.sort((a, b) => valueVariants.indexOf(b.value) - valueVariants.indexOf(a.value));
+                for (let i = 0; i < hand1.length; i++) {
+                    let value1 = valueVariants.indexOf(hand1[i].value);
+                    let value2 = valueVariants.indexOf(hand2[i].value);
+                    if (value1 > value2) {
+                        return 0;
+                    }
+                    else if (value1 < value2) {
+                        return 1;
+                    }
+                }
+                break;
+            case 2:
+                // Hands which both contain 2 pairs are ranked by the value of their highest pair. Hands with the same highest pair are ranked by the value of their other pair. If these values are the same the hands are ranked by the value of the remaining card.
+                break;
+            case 3:
+                // Hands which both contain three of a kind are ranked by the value of the 3 cards.
+                break;
+            case 4:
+                // Hands which both contain a straight are ranked by their highest card.
+                break;
+            case 5:
+                // Hands which are both flushes are ranked using the rules for High Card.
+                break;
+            case 6:
+                // Ranked by the value of the 3 cards.
+                break;
+            case 7:
+                // Ranked by the value of the 4 cards.
+                break;
+            case 8:
+                // Ranked by the highest card in the hand.
+                break;
+        }
+    }
     return powerLevels.findIndex((item) => item == ranking[ranking.length - 1]);
 }
 exports.getWinner = getWinner;
