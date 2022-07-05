@@ -171,7 +171,11 @@ function getCountSorted(hand: Hand) {
   return countSorted;
 }
 
-function getWinner(hands: Hand[]) {
+type WinnerReturn = {
+  index: number;
+  case: {};
+};
+function getWinner(hands: Hand[]): WinnerReturn {
   const powerLevels = [];
   for (let i = 0; i < hands.length; i++) {
     const hand = hands[i];
@@ -206,18 +210,18 @@ function getWinner(hands: Hand[]) {
           let value2 = valueVariants.indexOf(hand2[i].value);
 
           if (value1 > value2) {
-            return 0;
+            return { index: 0, case: doubles[0] };
           } else if (value1 < value2) {
-            return 1;
+            return { index: 1, case: doubles[1] };
           }
         }
         break;
       case 1:
         // Hands which both contain a pair are ranked by the value of the cards forming the pair. If these values are the same, the hands are ranked by the values of the cards not forming the pair, in decreasing order.
         if (doubles[0].level2 > doubles[1].level2) {
-          return 0;
+          return { index: 0, case: doubles[0] };
         } else if (doubles[0].level2 < doubles[1].level2) {
-          return 1;
+          return { index: 1, case: doubles[1] };
         }
 
         hand1 = hand1.filter((item) => item.value !== doubles[0].level2);
@@ -236,9 +240,9 @@ function getWinner(hands: Hand[]) {
           let value2 = valueVariants.indexOf(hand2[i].value);
 
           if (value1 > value2) {
-            return 0;
+            return { index: 0, case: doubles[0] };
           } else if (value1 < value2) {
-            return 1;
+            return { index: 1, case: doubles[1] };
           }
         }
 
@@ -267,7 +271,10 @@ function getWinner(hands: Hand[]) {
     }
   }
 
-  return powerLevels.findIndex((item) => item == ranking[ranking.length - 1]);
+  return {
+    index: powerLevels.findIndex((item) => item == ranking[ranking.length - 1]),
+    case: powerLevels.find((item) => item == ranking[ranking.length - 1]),
+  };
 }
 
 export { generateDeck, getHandsFromDeck, getWinner };

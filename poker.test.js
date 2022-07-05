@@ -64,8 +64,8 @@ test("Get Winner", function () {
     ],
   ];
 
-  expect(getWinner(hands1)).toBe(0);
-  expect(getWinner(hands2)).toBe(1);
+  expect(getWinner(hands1).index).toBe(0);
+  expect(getWinner(hands2).index).toBe(1);
 });
 
 test("Get Winner with same level", function () {
@@ -103,6 +103,6 @@ test("Get Winner with same level", function () {
     ],
   ];
 
-  expect(getWinner(hands1)).toBe(1);
-  expect(getWinner(hands2)).toBe(0);
+  expect(getWinner(hands1).index).toBe(1);
+  expect(getWinner(hands2).index).toBe(0);
 });

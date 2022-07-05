@@ -14,23 +14,10 @@ function main() {
     return __awaiter(this, void 0, void 0, function* () {
         let deck = (0, poker_1.generateDeck)();
         let hands = (0, poker_1.getHandsFromDeck)(deck, 2);
-        const hands2 = [
-            [
-                { value: "J", suit: "S" },
-                { value: "Q", suit: "C" },
-                { value: "A", suit: "C" },
-                { value: "J", suit: "C" },
-                { value: "A", suit: "H" },
-            ],
-            [
-                { value: "3", suit: "S" },
-                { value: "J", suit: "D" },
-                { value: "9", suit: "S" },
-                { value: "J", suit: "H" },
-                { value: "9", suit: "S" },
-            ],
-        ];
-        console.log(`Hand ${(0, poker_1.getWinner)(hands2)} hat gewonnen! (Starting from 0)`);
+        let winner = (0, poker_1.getWinner)(hands);
+        console.log(hands);
+        console.log(winner);
+        console.log(`Hand ${winner.index} hat gewonnen! (Starting from 0)`);
     });
 }
 main();
