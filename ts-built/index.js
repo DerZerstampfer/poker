@@ -12,11 +12,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const poker_1 = require("./poker");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
+        // Generate a full Deck with 52 unique cards
         let deck = (0, poker_1.generateDeck)();
+        // Generate x hands (5 Cards = 1 hand) from a deck
         let hands = (0, poker_1.getHandsFromDeck)(deck, 2);
+        // Get the Winner between hands
         let winner = (0, poker_1.getWinner)(hands);
-        console.log(hands);
-        console.log(winner);
         console.log(`Hand ${winner.index} hat gewonnen! (Starting from 0)`);
     });
 }

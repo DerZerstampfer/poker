@@ -20,6 +20,11 @@ type Card = {
   suit: SuitType;
 };
 
+type WinnerReturn = {
+  index: number;
+  case: {};
+};
+
 type Hand = Card[];
 
 const valueVariants: ValueType[] = [
@@ -74,10 +79,6 @@ function getHandsFromDeck(deck: Card[], count: number) {
 }
 
 function getPowerLevel(hand: Hand) {
-  let count = {};
-  let level = 0;
-  let level2 = 0;
-
   hand.sort(
     (a, b) => valueVariants.indexOf(a.value) - valueVariants.indexOf(b.value)
   );
@@ -171,10 +172,6 @@ function getCountSorted(hand: Hand) {
   return countSorted;
 }
 
-type WinnerReturn = {
-  index: number;
-  case: {};
-};
 function getWinner(hands: Hand[]): WinnerReturn {
   const powerLevels = [];
   for (let i = 0; i < hands.length; i++) {

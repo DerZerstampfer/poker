@@ -46,9 +46,6 @@ function getHandsFromDeck(deck, count) {
 }
 exports.getHandsFromDeck = getHandsFromDeck;
 function getPowerLevel(hand) {
-    let count = {};
-    let level = 0;
-    let level2 = 0;
     hand.sort((a, b) => valueVariants.indexOf(a.value) - valueVariants.indexOf(b.value));
     // If Straight Flush
     let straightFlush = true;
